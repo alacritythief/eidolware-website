@@ -13,42 +13,42 @@ import { SITE_TITLE } from '../consts';
 	<body>
 		<Header />
 		<main>
-			<section class="hero">
-				<h1>About Fat Bat Studio</h1>
-				<p class="subtitle">Independent game development with a cyberpunk edge</p>
+			<section class="text-center py-12 mb-12 border-b-2 border-cyber-purple">
+				<h1 class="text-6xl mb-4">About Fat Bat Studio</h1>
+				<p class="text-xl text-cyber-gray m-0">Independent game development with a cyberpunk edge</p>
 			</section>
 
-			<section class="content">
-				<div class="about-section">
-					<h2>Who We Are</h2>
-					<p>
+			<section class="max-w-4xl mx-auto">
+				<div class="my-12 p-8 bg-black/50 border border-cyber-purple rounded-lg transition-all duration-300 hover:border-cyber-cyan hover:shadow-[0_0_20px_rgba(177,255,236,0.2)]">
+					<h2 class="mt-0 text-3xl mb-4">Who We Are</h2>
+					<p class="text-lg leading-relaxed text-cyber-gray-dark m-0">
 						Fat Bat Studio is an independent game development studio focused on creating immersive narrative experiences
 						that blend dark humor, cyberpunk aesthetics, and engaging gameplay mechanics.
 					</p>
 				</div>
 
-				<div class="about-section">
-					<h2>Our Vision</h2>
-					<p>
+				<div class="my-12 p-8 bg-black/50 border border-cyber-purple rounded-lg transition-all duration-300 hover:border-cyber-cyan hover:shadow-[0_0_20px_rgba(177,255,236,0.2)]">
+					<h2 class="mt-0 text-3xl mb-4">Our Vision</h2>
+					<p class="text-lg leading-relaxed text-cyber-gray-dark m-0">
 						We believe in crafting games that challenge conventions and explore unique narratives. EIDOLWARE represents
 						our commitment to creating worlds that are both visually striking and thematically rich, where players can
 						uncover layers of story through exploration and combat.
 					</p>
 				</div>
 
-				<div class="about-section">
-					<h2>Current Project</h2>
-					<p>
+				<div class="my-12 p-8 bg-black/50 border border-cyber-purple rounded-lg transition-all duration-300 hover:border-cyber-cyan hover:shadow-[0_0_20px_rgba(177,255,236,0.2)]">
+					<h2 class="mt-0 text-3xl mb-4">Current Project</h2>
+					<p class="text-lg leading-relaxed text-cyber-gray-dark m-0">
 						Our flagship title, EIDOLWARE, is an action RPG that follows Anna Lam as she investigates her mentor's death
 						at a surreal 24/7 anime convention. The game features team-based combat, holographic environments powered by
 						blockchain technology, and a cast of memorable characters navigating a world where reality and digital illusion blur.
 					</p>
 				</div>
 
-				<div class="about-section">
-					<h2>Get in Touch</h2>
-					<div class="social-links">
-						<a href="https://bsky.app/profile/fatbat.studio" target="_blank" rel="noopener noreferrer" class="social-link">
+				<div class="my-12 p-8 bg-black/50 border border-cyber-purple rounded-lg transition-all duration-300 hover:border-cyber-cyan hover:shadow-[0_0_20px_rgba(177,255,236,0.2)]">
+					<h2 class="mt-0 text-3xl mb-4">Get in Touch</h2>
+					<div class="flex gap-6 mt-6 flex-wrap">
+						<a href="https://bsky.app/profile/fatbat.studio" target="_blank" rel="noopener noreferrer" class="flex items-center gap-3 px-6 py-4 border-2 border-cyber-purple rounded-lg bg-black/30 transition-all duration-300 font-semibold uppercase tracking-wider text-sm flex-shrink-0 hover:border-cyber-cyan hover:shadow-glow-cyan hover:-translate-y-0.5 hover:bg-cyber-cyan/10">
 							<svg viewBox="0 0 24 24" aria-hidden="true" width="32" height="32">
 								<path
 									fill="currentColor"
@@ -57,7 +57,7 @@ import { SITE_TITLE } from '../consts';
 							</svg>
 							Follow on Bluesky
 						</a>
-						<a href="https://fatbatstudio.itch.io/eidolware" target="_blank" rel="noopener noreferrer" class="social-link">
+						<a href="https://fatbatstudio.itch.io/eidolware" target="_blank" rel="noopener noreferrer" class="flex items-center gap-3 px-6 py-4 border-2 border-cyber-purple rounded-lg bg-black/30 transition-all duration-300 font-semibold uppercase tracking-wider text-sm flex-shrink-0 hover:border-cyber-cyan hover:shadow-glow-cyan hover:-translate-y-0.5 hover:bg-cyber-cyan/10">
 							<svg viewBox="0 0 24 24" aria-hidden="true" width="32" height="32">
 								<path
 									fill="currentColor"
@@ -75,104 +75,21 @@ import { SITE_TITLE } from '../consts';
 </html>
 
 <style>
-	.hero {
-		text-align: center;
-		padding: 3rem 0;
-		margin-bottom: 3rem;
-		border-bottom: 2px solid var(--purple);
-	}
-
-	.hero h1 {
-		font-size: 3.5rem;
-		margin-bottom: 1rem;
-	}
-
-	.subtitle {
-		font-size: 1.2rem;
-		color: rgb(var(--gray));
-		margin: 0;
-	}
-
-	.content {
-		max-width: 900px;
-		margin: 0 auto;
-	}
-
-	.about-section {
-		margin: 3rem 0;
-		padding: 2rem;
-		background-color: rgba(0, 0, 0, 0.5);
-		border: 1px solid var(--purple);
-		border-radius: 8px;
-		transition: all 0.3s ease;
-	}
-
-	.about-section:hover {
-		border-color: var(--cyan);
-		box-shadow: 0 0 20px rgba(177, 255, 236, 0.2);
-	}
-
-	.about-section h2 {
-		margin-top: 0;
-		font-size: 2rem;
-		margin-bottom: 1rem;
-	}
-
-	.about-section p {
-		font-size: 1.1rem;
-		line-height: 1.8;
-		color: rgb(var(--gray-dark));
-		margin: 0;
-	}
-
-	.social-links {
-		display: flex;
-		gap: 1.5rem;
-		margin-top: 1.5rem;
-		flex-wrap: wrap;
-	}
-
-	.social-link {
-		display: flex;
-		align-items: center;
-		gap: 0.75rem;
-		padding: 1rem 1.5rem;
-		border: 2px solid var(--purple);
-		border-radius: 8px;
-		background-color: rgba(0, 0, 0, 0.3);
-		transition: all 0.3s ease;
-		font-weight: 600;
-		text-transform: uppercase;
-		letter-spacing: 0.05em;
-		font-size: 0.9rem;
-	}
-
-	.social-link:hover {
-		border-color: var(--cyan);
-		box-shadow: var(--glow-cyan);
-		transform: translateY(-2px);
-		background-color: rgba(177, 255, 236, 0.1);
-	}
-
-	.social-link svg {
-		flex-shrink: 0;
-	}
-
 	@media (max-width: 720px) {
-		.hero h1 {
-			font-size: 2.5rem;
+		.text-6xl {
+			font-size: 2.5rem !important;
 		}
 
-		.about-section {
-			padding: 1.5rem;
+		.my-12.p-8 {
+			padding: 1.5rem !important;
 		}
 
-		.social-links {
-			flex-direction: column;
+		.flex.gap-6 {
+			flex-direction: column !important;
 		}
 
-		.social-link {
-			justify-content: center;
+		.flex.items-center {
+			justify-content: center !important;
 		}
 	}
 </style>

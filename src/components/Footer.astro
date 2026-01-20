@@ -2,13 +2,13 @@
 const today = new Date();
 ---
 
-<footer>
-	<div class="footer-content">
-		<div class="copyright">
+<footer class="mt-16 py-12 px-4 bg-black/80 border-t border-cyber-purple text-cyber-gray w-full box-border">
+	<div class="max-w-site mx-auto flex justify-between items-center flex-wrap gap-6">
+		<div class="text-cyber-gray-dark text-sm">
 			&copy; {today.getFullYear()} Fat Bat Studio. All rights reserved.
 		</div>
-		<div class="social-links">
-			<a href="https://bsky.app/profile/fatbat.studio" target="_blank" rel="noopener noreferrer">
+		<div class="flex justify-center gap-4">
+			<a href="https://bsky.app/profile/fatbat.studio" target="_blank" rel="noopener noreferrer" class="no-underline text-cyber-cyan transition-all duration-300 flex items-center p-2 hover:text-cyber-cyan hover:[filter:drop-shadow(0_0_8px_#b1ffec)] hover:-translate-y-0.5">
 				<span class="sr-only">Follow on Bluesky</span>
 				<svg viewBox="0 0 24 24" aria-hidden="true" width="28" height="28">
 					<path
@@ -17,7 +17,7 @@ const today = new Date();
 					/>
 				</svg>
 			</a>
-			<a href="https://fatbatstudio.itch.io/eidolware" target="_blank" rel="noopener noreferrer">
+			<a href="https://fatbatstudio.itch.io/eidolware" target="_blank" rel="noopener noreferrer" class="no-underline text-cyber-cyan transition-all duration-300 flex items-center p-2 hover:text-cyber-cyan hover:[filter:drop-shadow(0_0_8px_#b1ffec)] hover:-translate-y-0.5">
 				<span class="sr-only">Play on itch.io</span>
 				<svg viewBox="0 0 245.371 220.736" aria-hidden="true" width="28" height="28">
 					<path
@@ -29,51 +29,12 @@ const today = new Date();
 		</div>
 	</div>
 </footer>
+
 <style>
-	footer {
-		margin-top: 4rem;
-		padding: 3em 1em;
-		background: rgba(0, 0, 0, 0.8);
-		border-top: 1px solid var(--purple);
-		color: rgb(var(--gray));
-		width: 100%;
-		box-sizing: border-box;
-	}
-	.footer-content {
-		max-width: 1400px;
-		margin: 0 auto;
-		display: flex;
-		justify-content: space-between;
-		align-items: center;
-		flex-wrap: wrap;
-		gap: 1.5rem;
-	}
-	.copyright {
-		color: rgb(var(--gray-dark));
-		font-size: 0.9rem;
-	}
-	.social-links {
-		display: flex;
-		justify-content: center;
-		gap: 1em;
-	}
-	.social-links a {
-		text-decoration: none;
-		color: var(--cyan);
-		transition: all 0.3s ease;
-		display: flex;
-		align-items: center;
-		padding: 0.5em;
-	}
-	.social-links a:hover {
-		color: var(--cyan);
-		filter: drop-shadow(0 0 8px var(--cyan));
-		transform: translateY(-2px);
-	}
 	@media (max-width: 720px) {
-		.footer-content {
-			flex-direction: column;
-			text-align: center;
+		.flex.justify-between {
+			flex-direction: column !important;
+			text-align: center !important;
 		}
 	}
 </style>

@@ -19,31 +19,32 @@ const posts = (await getCollection('blog')).sort(
 	<body>
 		<Header />
 		<main>
-			<section class="hero">
-				<h1>EIDOLWARE</h1>
-				<p class="tagline">{SITE_DESCRIPTION}</p>
-				<div class="cta-buttons">
-					<a href="https://fatbatstudio.itch.io/eidolware" target="_blank" rel="noopener noreferrer" class="cta-primary">
+			<section class="text-center py-16 mb-12">
+				<h1 class="text-6xl mb-4 bg-gradient-to-br from-cyber-cyan to-cyber-purple bg-clip-text text-transparent">EIDOLWARE</h1>
+				<p class="text-xl text-cyber-gray-dark mb-8 max-w-3xl mx-auto">{SITE_DESCRIPTION}</p>
+				<div class="flex gap-4 justify-center flex-wrap">
+					<a href="https://fatbatstudio.itch.io/eidolware" target="_blank" rel="noopener noreferrer" class="group relative px-8 py-4 rounded-lg font-semibold uppercase tracking-widest transition-all duration-300 text-base bg-gradient-to-br from-cyber-purple to-cyber-purple-dark text-cyber-cyan border-2 border-cyber-purple overflow-hidden hover:shadow-glow-purple hover:-translate-y-0.5 hover:border-cyber-cyan">
+						<span class="absolute top-0 -left-full w-full h-full bg-gradient-to-r from-transparent via-cyber-cyan/30 to-transparent animate-[shine_3s_infinite]"></span>
 						Follow on itch.io
 					</a>
-					<a href="#" class="cta-steam" title="Coming Soon">
+					<a href="#" class="px-8 py-4 rounded-lg font-semibold uppercase tracking-widest transition-all duration-300 text-base bg-transparent text-[#66c0f4] border-2 border-[#1b2838] hover:shadow-[0_0_20px_rgba(102,192,244,0.2)] hover:-translate-y-0.5 hover:border-[#66c0f4] hover:bg-[#66c0f4]/5" title="Coming Soon">
 						Steam Coming Soon
 					</a>
-					<a href="/blog" class="cta-secondary">
+					<a href="/blog" class="px-8 py-4 rounded-lg font-semibold uppercase tracking-widest transition-all duration-300 text-base bg-transparent text-cyber-cyan border-2 border-cyber-cyan hover:bg-cyber-cyan/10 hover:shadow-glow-cyan hover:-translate-y-0.5">
 						Devlog
 					</a>
 				</div>
 			</section>
 
-			<section class="about">
-				<h2>About the Game</h2>
-				<p class="intro">
+			<section class="my-12 p-8 bg-black/50 border border-cyber-purple rounded-lg box-border">
+				<h2 class="mt-0">About the Game</h2>
+				<p class="text-lg leading-relaxed font-bold">
 					Infiltrate a 24/7 anime convention where holograms are real, influencers reign supreme, and cosplay culture has gone completely off the rails in this satirical action-RPG by FATBAT Studio.
 				</p>
-				<p>
+				<p class="text-lg leading-relaxed">
 					You are Anna Lam, a former AI engineer. The mysterious death of your mentor has led you to a newly established 24-hour anime convention, owned and operated by a crypto-billionaire who styles himself "Fedora Mask".
 				</p>
-				<p>
+				<p class="text-lg leading-relaxed">
 					Immerse yourself in the convention and meet its strange denizens. Team up with unlikely allies to defeat Fedora Mask's lieutenants and gain access to the convention's inner circle. Uncover the truth behind your mentor's death and if anyone is responsible, put an end to their plans.
 				</p>
 			</section>
@@ -51,18 +52,18 @@ const posts = (await getCollection('blog')).sort(
 			<BlueskyFeed />
 
 			{posts.length > 0 && (
-				<section class="recent-posts">
-					<div class="section-header">
-						<h2>Devlog</h2>
-						<a href="/blog" class="view-all">View all posts →</a>
+				<section class="my-12">
+					<div class="flex justify-between items-center mb-8 border-b-2 border-cyber-purple pb-4">
+						<h2 class="m-0">Devlog</h2>
+						<a href="/blog" class="text-sm uppercase tracking-widest font-semibold px-4 py-2 border border-cyber-cyan rounded transition-all duration-300 hover:bg-cyber-cyan/10 hover:shadow-glow-cyan">View all posts →</a>
 					</div>
-					<div class="posts-grid">
+					<div class="grid grid-cols-[repeat(auto-fit,minmax(320px,1fr))] gap-8">
 						{posts.map((post) => (
-							<article class="blog-card">
-								<a href={`/blog/${post.slug}/`}>
-									<h3>{post.data.title}</h3>
-									<time>{post.data.pubDate.toLocaleDateString('en-US', { year: 'numeric', month: 'short', day: 'numeric' })}</time>
-									<p>{post.data.description}</p>
+							<article class="p-6 bg-black/50 border border-cyber-purple rounded-lg transition-all duration-300 hover:border-cyber-cyan hover:shadow-[0_0_20px_rgba(177,255,236,0.2)] hover:-translate-y-0.5">
+								<a href={`/blog/${post.slug}/`} class="no-underline text-inherit">
+									<h3 class="text-xl mb-2 text-cyber-cyan">{post.data.title}</h3>
+									<time class="text-sm text-cyber-gray block mb-3">{post.data.pubDate.toLocaleDateString('en-US', { year: 'numeric', month: 'short', day: 'numeric' })}</time>
+									<p class="text-cyber-gray-dark leading-relaxed m-0">{post.data.description}</p>
 								</a>
 							</article>
 						))}
@@ -75,230 +76,47 @@ const posts = (await getCollection('blog')).sort(
 </html>
 
 <style>
-	.hero {
-		text-align: center;
-		padding: 4rem 0;
-		margin-bottom: 3rem;
-	}
-
-	.hero h1 {
-		font-size: 4rem;
-		margin-bottom: 1rem;
-		background: linear-gradient(135deg, var(--cyan) 0%, var(--purple) 100%);
-		-webkit-background-clip: text;
-		-webkit-text-fill-color: transparent;
-		background-clip: text;
-	}
-
-	.tagline {
-		font-size: 1.3rem;
-		color: rgb(var(--gray-dark));
-		margin-bottom: 2rem;
-		max-width: 800px;
-		margin-left: auto;
-		margin-right: auto;
-	}
-
-	.cta-buttons {
-		display: flex;
-		gap: 1rem;
-		justify-content: center;
-		flex-wrap: wrap;
-	}
-
-	.cta-primary,
-	.cta-secondary,
-	.cta-steam {
-		padding: 1rem 2rem;
-		border-radius: 8px;
-		font-weight: 600;
-		text-transform: uppercase;
-		letter-spacing: 0.1em;
-		transition: all 0.3s ease;
-		font-size: 1rem;
-	}
-
-	.cta-primary {
-		background: linear-gradient(135deg, var(--purple) 0%, var(--purple-dark) 100%);
-		color: var(--cyan);
-		border: 2px solid var(--purple);
-		position: relative;
-		overflow: hidden;
-	}
-
-	.cta-primary::after {
-		content: '';
-		position: absolute;
-		top: 0;
-		left: -100%;
-		width: 100%;
-		height: 100%;
-		background: linear-gradient(90deg, transparent, rgba(177, 255, 236, 0.3), transparent);
-		animation: itch-shine 3s infinite;
-	}
-
-	@keyframes itch-shine {
+	@keyframes shine {
 		0% { left: -100%; }
 		50%, 100% { left: 100%; }
 	}
 
-	.cta-primary:hover {
-		box-shadow: var(--glow-purple);
-		transform: translateY(-2px);
-		border-color: var(--cyan);
-	}
-
-	.cta-steam {
-		background: transparent;
-		color: #66c0f4;
-		border: 2px solid #1b2838;
-	}
-
-	.cta-steam:hover {
-		box-shadow: 0 0 20px rgba(102, 192, 244, 0.2);
-		transform: translateY(-2px);
-		border-color: #66c0f4;
-		background-color: rgba(102, 192, 244, 0.05);
-	}
-
-	.cta-secondary {
-		background: transparent;
-		color: var(--cyan);
-		border: 2px solid var(--cyan);
-	}
-
-	.cta-secondary:hover {
-		background-color: rgba(177, 255, 236, 0.1);
-		box-shadow: var(--glow-cyan);
-		transform: translateY(-2px);
-	}
-
-	.about {
-		margin: 3rem 0;
-		padding: 2rem;
-		background-color: rgba(0, 0, 0, 0.5);
-		border: 1px solid var(--purple);
-		border-radius: 8px;
-		box-sizing: border-box;
-	}
-
-	.about h2 {
-		margin-top: 0;
-	}
-
-	.about p {
-		font-size: 1.1rem;
-		line-height: 1.8;
-	}
-
-	.about p.intro {
-		font-weight: 700;
-	}
-
-	.recent-posts {
-		margin: 3rem 0;
-	}
-
-	.section-header {
-		display: flex;
-		justify-content: space-between;
-		align-items: center;
-		margin-bottom: 2rem;
-		border-bottom: 2px solid var(--purple);
-		padding-bottom: 1rem;
-	}
-
-	.section-header h2 {
-		margin: 0;
-	}
-
-	.posts-grid {
-		display: grid;
-		grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
-		gap: 2rem;
-	}
-
-	.blog-card {
-		padding: 1.5rem;
-		background-color: rgba(0, 0, 0, 0.5);
-		border: 1px solid var(--purple);
-		border-radius: 8px;
-		transition: all 0.3s ease;
-	}
-
-	.blog-card:hover {
-		border-color: var(--cyan);
-		box-shadow: 0 0 20px rgba(177, 255, 236, 0.2);
-		transform: translateY(-2px);
-	}
-
-	.blog-card a {
-		color: inherit;
-		text-decoration: none;
-	}
-
-	.blog-card h3 {
-		font-size: 1.3rem;
-		margin-bottom: 0.5rem;
-		color: var(--cyan);
-	}
-
-	.blog-card time {
-		font-size: 0.85rem;
-		color: rgb(var(--gray));
-		display: block;
-		margin-bottom: 0.75rem;
-	}
-
-	.blog-card p {
-		color: rgb(var(--gray-dark));
-		line-height: 1.6;
-		margin: 0;
-	}
-
 	@media (max-width: 720px) {
-		.hero {
-			padding: 2rem 0;
-			margin-bottom: 2rem;
+		.text-6xl {
+			font-size: 2rem !important;
+			margin-bottom: 0.75rem !important;
 		}
 
-		.hero h1 {
-			font-size: 2rem;
-			margin-bottom: 0.75rem;
+		.text-xl {
+			font-size: 1rem !important;
 		}
 
-		.tagline {
-			font-size: 1rem;
+		.flex.gap-4 {
+			flex-direction: column !important;
+			gap: 0.75rem !important;
 		}
 
-		.cta-buttons {
-			flex-direction: column;
-			gap: 0.75rem;
+		.px-8.py-4 {
+			width: 100% !important;
+			max-width: 100% !important;
+			padding: 0.875rem 1rem !important;
+			font-size: 0.9rem !important;
+			box-sizing: border-box !important;
 		}
 
-		.cta-primary,
-		.cta-secondary,
-		.cta-steam {
-			width: 100%;
-			max-width: 100%;
-			padding: 0.875rem 1rem;
-			font-size: 0.9rem;
-			box-sizing: border-box;
+		section.p-8 {
+			padding: 1.5rem 1rem !important;
+			margin: 2rem 0 !important;
 		}
 
-		.about {
-			padding: 1.5rem 1rem;
-			margin: 2rem 0;
+		.flex.justify-between {
+			flex-direction: column !important;
+			align-items: flex-start !important;
+			gap: 1rem !important;
 		}
 
-		.section-header {
-			flex-direction: column;
-			align-items: flex-start;
-			gap: 1rem;
-		}
-
-		.posts-grid {
-			grid-template-columns: 1fr;
+		.grid {
+			grid-template-columns: 1fr !important;
 		}
 	}
 </style>
