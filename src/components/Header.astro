@@ -3,10 +3,10 @@ import { SITE_TITLE } from '../consts';
 import HeaderLink from './HeaderLink.astro';
 ---
 
-<header class="m-0 px-4 bg-black/80 border-b border-cyber-purple w-full box-border shadow-[0_4px_20px_rgba(109,31,104,0.3)] backdrop-blur-md">
-	<nav class="grid grid-cols-[1fr_auto_1fr] items-center max-w-site mx-auto relative">
+<header class="m-0 bg-black/80 border-b border-cyber-purple w-full box-border shadow-[0_4px_20px_rgba(109,31,104,0.3)] backdrop-blur-md">
+	<nav class="grid grid-cols-[1fr_auto_1fr] items-center w-full max-w-site mx-auto relative px-8">
 		<h2 class="m-0 text-2xl font-display font-extrabold justify-self-start">
-			<a href="/" class="no-underline bg-gradient-to-br from-cyber-cyan to-cyber-purple bg-clip-text text-transparent">{SITE_TITLE}</a>
+			<a href="/" class="header-logo no-underline">{SITE_TITLE}</a>
 		</h2>
 		<div class="flex gap-2 justify-center">
 			<HeaderLink href="/">Home</HeaderLink>
@@ -38,6 +38,20 @@ import HeaderLink from './HeaderLink.astro';
 </header>
 
 <style>
+	.header-logo {
+		background: linear-gradient(135deg, var(--cyber-cyan) 0%, var(--cyber-purple) 100%);
+		-webkit-background-clip: text;
+		-webkit-text-fill-color: transparent;
+		background-clip: text;
+		/* Fallback for browsers that don't support background-clip */
+		color: var(--cyber-cyan);
+	}
+
+	/* Override the global a tag color for the logo */
+	.header-logo:hover {
+		text-shadow: none;
+	}
+
 	@media (max-width: 720px) {
 		nav {
 			grid-template-columns: 1fr !important;

@@ -20,7 +20,7 @@ const posts = (await getCollection('blog')).sort(
 		<Header />
 		<main>
 			<section class="text-center py-16 mb-12">
-				<h1 class="text-6xl mb-4 bg-gradient-to-br from-cyber-cyan to-cyber-purple bg-clip-text text-transparent">EIDOLWARE</h1>
+				<h1 class="hero-title text-6xl mb-4">EIDOLWARE</h1>
 				<p class="text-xl text-cyber-gray-dark mb-8 max-w-3xl mx-auto">{SITE_DESCRIPTION}</p>
 				<div class="flex gap-4 justify-center flex-wrap">
 					<a href="https://fatbatstudio.itch.io/eidolware" target="_blank" rel="noopener noreferrer" class="group relative px-8 py-4 rounded-lg font-semibold uppercase tracking-widest transition-all duration-300 text-base bg-gradient-to-br from-cyber-purple to-cyber-purple-dark text-cyber-cyan border-2 border-cyber-purple overflow-hidden hover:shadow-glow-purple hover:-translate-y-0.5 hover:border-cyber-cyan">
@@ -37,7 +37,7 @@ const posts = (await getCollection('blog')).sort(
 			</section>
 
 			<section class="my-12 p-8 bg-black/50 border border-cyber-purple rounded-lg box-border">
-				<h2 class="mt-0">About the Game</h2>
+				<h2 class="mt-0 text-3xl">About the Game</h2>
 				<p class="text-lg leading-relaxed font-bold">
 					Infiltrate a 24/7 anime convention where holograms are real, influencers reign supreme, and cosplay culture has gone completely off the rails in this satirical action-RPG by FATBAT Studio.
 				</p>
@@ -54,7 +54,7 @@ const posts = (await getCollection('blog')).sort(
 			{posts.length > 0 && (
 				<section class="my-12">
 					<div class="flex justify-between items-center mb-8 border-b-2 border-cyber-purple pb-4">
-						<h2 class="m-0">Devlog</h2>
+						<h2 class="m-0 text-3xl">Devlog</h2>
 						<a href="/blog" class="text-sm uppercase tracking-widest font-semibold px-4 py-2 border border-cyber-cyan rounded transition-all duration-300 hover:bg-cyber-cyan/10 hover:shadow-glow-cyan">View all posts →</a>
 					</div>
 					<div class="grid grid-cols-[repeat(auto-fit,minmax(320px,1fr))] gap-8">
@@ -76,12 +76,18 @@ const posts = (await getCollection('blog')).sort(
 </html>
 
 <style>
+	.hero-title {
+		/* Use the standard h1 glow like on the character page */
+		text-shadow: 0 0 10px rgba(177, 255, 236, 0.8), 0 0 20px rgba(177, 255, 236, 0.6), 0 0 30px rgba(177, 255, 236, 0.4);
+	}
+
 	@keyframes shine {
 		0% { left: -100%; }
 		50%, 100% { left: 100%; }
 	}
 
 	@media (max-width: 720px) {
+		.hero-title,
 		.text-6xl {
 			font-size: 2rem !important;
 			margin-bottom: 0.75rem !important;
