@@ -20,19 +20,37 @@ const posts = (await getCollection('blog')).sort(
 		<Header />
 		<main>
 			<section class="text-center py-16 mb-12">
-				<h1 class="hero-title text-6xl mb-4">[EIDOLWARE]</h1>
-				<p class="text-xl text-cyber-gray-dark mb-8 max-w-3xl mx-auto">{SITE_DESCRIPTION}</p>
-				<div class="flex gap-4 justify-center flex-wrap">
-					<a href="https://fatbatstudio.itch.io/eidolware" target="_blank" rel="noopener noreferrer" class="group relative px-8 py-4 rounded-lg font-semibold uppercase tracking-widest transition-all duration-300 text-base bg-cyber-purple text-cyber-cyan border-2 border-cyber-purple overflow-hidden hover:shadow-glow-purple hover:-translate-y-0.5 hover:border-cyber-cyan">
-						<span class="absolute inset-0 -translate-x-full bg-gradient-to-r from-transparent via-white/50 to-transparent animate-[shine_3s_infinite]"></span>
-						<span class="relative z-10">Follow on itch.io</span>
-					</a>
-					<a href="#" class="px-8 py-4 rounded-lg font-semibold uppercase tracking-widest transition-all duration-300 text-base bg-transparent text-[#66c0f4] border-2 border-[#1b2838] hover:shadow-[0_0_20px_rgba(102,192,244,0.2)] hover:-translate-y-0.5 hover:border-[#66c0f4] hover:bg-[#66c0f4]/5" title="Coming Soon">
-						Steam Coming Soon
-					</a>
-					<a href="/blog" class="px-8 py-4 rounded-lg font-semibold uppercase tracking-widest transition-all duration-300 text-base bg-transparent text-cyber-cyan border-2 border-cyber-cyan hover:bg-cyber-cyan/10 hover:shadow-glow-cyan hover:-translate-y-0.5">
-						Devlog
-					</a>
+				<div class="hero-content">
+					<!-- Developer tag -->
+					<p class="hero-tag text-cyber-purple uppercase tracking-[0.3em] text-sm font-medium mb-6">
+						FATBAT Studio Presents
+					</p>
+
+					<!-- Logo/Title -->
+					<h1 class="hero-title text-7xl md:text-8xl lg:text-9xl mb-4 font-bold tracking-tight">[EIDOLWARE]</h1>
+
+					<!-- Tagline -->
+					<p class="hero-tagline text-xl text-cyber-gray-dark mb-8 max-w-3xl mx-auto">{SITE_DESCRIPTION}</p>
+
+					<!-- Status badge -->
+					<div class="hero-badge inline-flex items-center gap-2 px-4 py-2 rounded-full border border-cyber-cyan/30 bg-black/50 backdrop-blur-sm mb-8">
+						<span class="w-2 h-2 rounded-full bg-green-500 animate-pulse"></span>
+						<span class="text-sm text-cyber-gray uppercase tracking-wider">In Development</span>
+					</div>
+
+					<!-- CTA Buttons -->
+					<div class="hero-buttons flex gap-4 justify-center flex-wrap">
+						<a href="https://fatbatstudio.itch.io/eidolware" target="_blank" rel="noopener noreferrer" class="group relative px-8 py-4 rounded-lg font-semibold uppercase tracking-widest transition-all duration-300 text-base bg-cyber-purple text-cyber-cyan border-2 border-cyber-purple overflow-hidden hover:shadow-glow-purple hover:-translate-y-0.5 hover:border-cyber-cyan">
+							<span class="absolute inset-0 -translate-x-full bg-gradient-to-r from-transparent via-white/50 to-transparent animate-[shine_3s_infinite]"></span>
+							<span class="relative z-10">Follow on itch.io</span>
+						</a>
+						<a href="#" class="px-8 py-4 rounded-lg font-semibold uppercase tracking-widest transition-all duration-300 text-base bg-transparent text-[#66c0f4] border-2 border-[#1b2838] hover:shadow-[0_0_20px_rgba(102,192,244,0.2)] hover:-translate-y-0.5 hover:border-[#66c0f4] hover:bg-[#66c0f4]/5" title="Coming Soon">
+							Steam Coming Soon
+						</a>
+						<a href="/blog" class="px-8 py-4 rounded-lg font-semibold uppercase tracking-widest transition-all duration-300 text-base bg-transparent text-cyber-cyan border-2 border-cyber-cyan hover:bg-cyber-cyan/10 hover:shadow-glow-cyan hover:-translate-y-0.5">
+							Devlog
+						</a>
+					</div>
 				</div>
 			</section>
 
@@ -76,9 +94,62 @@ const posts = (await getCollection('blog')).sort(
 </html>
 
 <style>
+	/* Hero animations */
+	@keyframes fadeInUp {
+		from {
+			opacity: 0;
+			transform: translateY(20px);
+		}
+		to {
+			opacity: 1;
+			transform: translateY(0);
+		}
+	}
+
+	@keyframes fadeIn {
+		from {
+			opacity: 0;
+		}
+		to {
+			opacity: 1;
+		}
+	}
+
+	@keyframes scaleIn {
+		from {
+			opacity: 0;
+			transform: scale(0.9);
+		}
+		to {
+			opacity: 1;
+			transform: scale(1);
+		}
+	}
+
+	.hero-content {
+		animation: fadeInUp 0.8s ease-out;
+	}
+
+	.hero-tag {
+		animation: fadeIn 0.6s ease-out 0.2s backwards;
+	}
+
 	.hero-title {
 		/* Use the standard h1 glow like on the character page */
 		text-shadow: 0 0 10px rgba(177, 255, 236, 0.8), 0 0 20px rgba(177, 255, 236, 0.6), 0 0 30px rgba(177, 255, 236, 0.4);
+		animation: scaleIn 0.6s ease-out 0.4s backwards, flicker 4s linear 1s infinite;
+	}
+
+	.hero-tagline {
+		animation: fadeIn 0.6s ease-out 0.6s backwards;
+	}
+
+	.hero-badge {
+		animation: fadeIn 0.6s ease-out 0.8s backwards;
+	}
+
+	.hero-buttons {
+		animation: fadeInUp 0.6s ease-out 1s backwards;
 	}
 
 	@keyframes shine {
@@ -87,8 +158,7 @@ const posts = (await getCollection('blog')).sort(
 	}
 
 	@media (max-width: 720px) {
-		.hero-title,
-		.text-6xl {
+		.hero-title {
 			font-size: 2rem !important;
 			margin-bottom: 0.75rem !important;
 		}
