@@ -72,6 +72,113 @@ function getPostUrl(uri: string) {
   const postId = parts[parts.length - 1];
   return `https://bsky.app/profile/${handle}/post/${postId}`;
 }
+
+function normalizeUrl(urlOrDomain: string) {
+  if (/^https?:\/\//i.test(urlOrDomain)) return urlOrDomain;
+  return `https://${urlOrDomain}`;
+}
+
+function extractFirstUrlLike(text: string) {
+  const urlRegex =
+    /(?:https?:\/\/)?(?:www\.)?(?:youtu\.be\/[^\s<>()]+|(?:m\.)?(?:music\.)?youtube\.com\/[^\s<>()]+)/gi;
+
+  for (const match of text.matchAll(urlRegex)) {
+    const raw = match[0];
+    const cleaned = raw.replace(/[)\].,!?]+$/, '');
+    return normalizeUrl(cleaned);
+  }
+
+  return null;
+}
+
+function getYouTubeIdFromUrl(urlOrDomain: string) {
+  try {
+    const url = new URL(normalizeUrl(urlOrDomain));
+    const hostname = url.hostname.replace(/^www\./, '');
+
+    if (hostname === 'youtu.be') {
+      const id = url.pathname.split('/').filter(Boolean)[0];
+      return id && id.length === 11 ? id : null;
+    }
+
+    if (hostname.endsWith('youtube.com')) {
+      if (url.pathname === '/watch') {
+        const id = url.searchParams.get('v');
+        return id && id.length === 11 ? id : null;
+      }
+
+      const shortsMatch = url.pathname.match(/^\/shorts\/([A-Za-z0-9_-]{11})/);
+      if (shortsMatch) return shortsMatch[1];
+
+      const embedMatch = url.pathname.match(/^\/embed\/([A-Za-z0-9_-]{11})/);
+      if (embedMatch) return embedMatch[1];
+    }
+  } catch {
+    // ignore malformed URLs
+  }
+
+  return null;
+}
+
+function isExternalEmbed(embed: BlueskyPost['embed']) {
+  return Boolean(embed?.external && embed.$type?.startsWith('app.bsky.embed.external'));
+}
+
+function getYouTubeIdFromPost(post: BlueskyPost) {
+  if (isExternalEmbed(post.embed) && post.embed?.external?.uri) {
+    const idFromEmbed = getYouTubeIdFromUrl(post.embed.external.uri);
+    if (idFromEmbed) return idFromEmbed;
+  }
+
+  const firstUrl = extractFirstUrlLike(post.record.text);
+  if (!firstUrl) return null;
+  return getYouTubeIdFromUrl(firstUrl);
+}
+
+function isYouTubeUrl(urlOrDomain: string) {
+  try {
+    const url = new URL(normalizeUrl(urlOrDomain));
+    const hostname = url.hostname.replace(/^www\./, '');
+    return hostname === 'youtu.be' || hostname.endsWith('youtube.com');
+  } catch {
+    return false;
+  }
+}
+
+type TextToken =
+  | { kind: 'text'; value: string }
+  | { kind: 'link'; value: string; href: string };
+
+function tokenizeTextWithYouTubeLinks(text: string): TextToken[] {
+  const urlRegex =
+    /(?:https?:\/\/)?(?:www\.)?(?:youtu\.be\/[^\s<>()]+|(?:m\.)?(?:music\.)?youtube\.com\/[^\s<>()]+)/gi;
+
+  const tokens: TextToken[] = [];
+  let lastIndex = 0;
+
+  for (const match of text.matchAll(urlRegex)) {
+    const raw = match[0];
+    const start = match.index ?? 0;
+
+    if (start > lastIndex) {
+      tokens.push({ kind: 'text', value: text.slice(lastIndex, start) });
+    }
+
+    const cleaned = raw.replace(/[)\].,!?]+$/, '');
+    const trailing = raw.slice(cleaned.length);
+
+    tokens.push({ kind: 'link', value: cleaned, href: normalizeUrl(cleaned) });
+    if (trailing) tokens.push({ kind: 'text', value: trailing });
+
+    lastIndex = start + raw.length;
+  }
+
+  if (lastIndex < text.length) {
+    tokens.push({ kind: 'text', value: text.slice(lastIndex) });
+  }
+
+  return tokens;
+}
 ---
 
 <section class="my-12">
@@ -103,7 +210,42 @@ function getPostUrl(uri: string) {
             <time class="text-sm text-cyber-gray">{formatDate(post.record.createdAt)}</time>
           </div>
 
-          <p class="my-4 leading-relaxed text-cyber-gray-dark whitespace-pre-wrap">{post.record.text}</p>
+          <p class="my-4 leading-relaxed text-cyber-gray-dark whitespace-pre-wrap">
+            {tokenizeTextWithYouTubeLinks(post.record.text).map((token) =>
+              token.kind === 'text' ? (
+                token.value
+              ) : (
+                <a
+                  href={token.href}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  class="text-cyber-cyan underline break-words hover:text-white"
+                >
+                  {token.value}
+                </a>
+              )
+            )}
+          </p>
+
+          {(() => {
+            const youTubeId = getYouTubeIdFromPost(post);
+
+            if (!youTubeId) return null;
+
+            return (
+              <div class="my-4 rounded-lg overflow-hidden youtube-embed">
+                <iframe
+                  src={`https://www.youtube-nocookie.com/embed/${youTubeId}`}
+                  title="YouTube video player"
+                  loading="lazy"
+                  allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+                  allowfullscreen
+                  referrerpolicy="strict-origin-when-cross-origin"
+                  class="w-full block border border-cyber-purple bg-black transition-all duration-300 hover:border-cyber-cyan hover:shadow-[0_0_15px_rgba(177,255,236,0.3)]"
+                />
+              </div>
+            );
+          })()}
 
           {post.embed?.images && post.embed.images.length > 0 && (
             <div class={post.embed.images.length === 1 ? 'my-4 rounded-lg overflow-hidden max-w-full' : 'my-4 rounded-lg overflow-hidden grid grid-cols-2 gap-2'}>
@@ -134,7 +276,7 @@ function getPostUrl(uri: string) {
             </div>
           )}
 
-          {post.embed?.$type === 'app.bsky.embed.external' && post.embed.external && (
+          {isExternalEmbed(post.embed) && post.embed?.external && !isYouTubeUrl(post.embed.external.uri) && (
             <a href={post.embed.external.uri} target="_blank" rel="noopener noreferrer" class="flex gap-4 p-4 my-4 bg-black/30 border border-cyber-purple rounded-lg no-underline transition-all duration-300 hover:border-cyber-cyan hover:bg-cyber-cyan/5">
               {post.embed.external.thumb && (
                 <img src={post.embed.external.thumb} alt={post.embed.external.title} class="w-[120px] h-[120px] object-cover rounded border border-cyber-purple flex-shrink-0" />
@@ -158,6 +300,11 @@ function getPostUrl(uri: string) {
 </section>
 
 <style>
+  .youtube-embed iframe {
+    aspect-ratio: 16 / 9;
+    height: auto;
+  }
+
   .line-clamp-2 {
     display: -webkit-box;
     -webkit-line-clamp: 2;
