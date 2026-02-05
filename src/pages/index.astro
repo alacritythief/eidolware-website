@@ -52,7 +52,8 @@ const posts = (await getCollection("blog"))
             </h1>
             <div class="tagline">
               <div class="tag-line"></div>
-              <span class="tag-text">Cyberpunk Anime Convention Action-RPG</span>
+              <span class="tag-text">Cyberpunk Anime Convention Action-RPG</span
+              >
               <div class="tag-line"></div>
             </div>
           </div>
@@ -64,9 +65,11 @@ const posts = (await getCollection("blog"))
               href="https://fatbatstudio.itch.io/eidolware"
               target="_blank"
               rel="noopener noreferrer"
-              class="btn btn-pink"
-            >Follow on itch.io</a>
-            <a href="#" class="btn btn-ghost" title="Coming Soon">Steam — Coming Soon</a>
+              class="btn btn-pink">Follow on itch.io</a
+            >
+            <a href="#" class="btn btn-ghost" title="Coming Soon"
+              >Steam — Coming Soon</a
+            >
             <a href="/blog" class="btn btn-cyan">Devlog</a>
           </div>
         </div>
@@ -142,16 +145,24 @@ const posts = (await getCollection("blog"))
               <span class="idx-num">A</span>
               <div class="idx-line"></div>
             </div>
-            <h3>Holographic World</h3>
-            <p>A convention where Hard Light technology blurs the line between fantasy and reality.</p>
+            <h3>Underground Convention</h3>
+            <p>
+              A 24/7 anime convention in an underground bunker, powered by
+              holographic technology and funded by a crypto-billionaire's dream
+              of making anime real.
+            </p>
           </div>
           <div class="feature">
             <div class="feature-idx">
               <span class="idx-num">B</span>
               <div class="idx-line"></div>
             </div>
-            <h3>Sharp Satire</h3>
-            <p>Biting commentary on fandom, crypto-grifters, and influencer worship.</p>
+            <h3>Distinct Wings</h3>
+            <p>
+              Explore themed convention wings: an artist alley that turns into a
+              haunted forest, a ballroom dance-off, a cosplay battle royale, and
+              secret areas, each run by a lieutenant with their own rules.
+            </p>
           </div>
           <div class="feature">
             <div class="feature-idx">
@@ -159,46 +170,57 @@ const posts = (await getCollection("blog"))
               <div class="idx-line"></div>
             </div>
             <h3>Eccentric Cast</h3>
-            <p>K-Pop dancers, kawaii streamers, Halloween lifestylists, and a masked billionaire.</p>
+            <p>
+              A Halloween obsessive, a K-Pop dancer who only speaks through
+              movement, a kawaii influencer, a vinyl figure mystic, and a masked
+              billionaire who thinks he's a Level 20 Paladin.
+            </p>
           </div>
         </div>
       </section>
 
       <BlueskyFeed />
 
-      {posts.length > 0 && (
-        <section class="devlog">
-          <div class="section-head">
-            <div class="num-block num-pink">
-              <span class="num">03</span>
+      {
+        posts.length > 0 && (
+          <section class="devlog">
+            <div class="section-head">
+              <div class="num-block num-pink">
+                <span class="num">03</span>
+              </div>
+              <div class="head-text">
+                <span class="head-jp">開発日記</span>
+                <h2 class="head-title">Devlog</h2>
+              </div>
+              <div class="head-rule" />
+              <a href="/blog" class="devlog-all">
+                All Posts →
+              </a>
             </div>
-            <div class="head-text">
-              <span class="head-jp">開発日記</span>
-              <h2 class="head-title">Devlog</h2>
+            <div class="devlog-grid">
+              {posts.map((post, i) => (
+                <article class="devlog-card">
+                  <a href={`/blog/${post.id}/`} class="devlog-link">
+                    <div
+                      class="card-top-stripe"
+                      style={`background: ${i % 2 === 0 ? "#e8157a" : "#00e5c3"}`}
+                    />
+                    <time>
+                      {post.data.pubDate.toLocaleDateString("en-US", {
+                        year: "numeric",
+                        month: "short",
+                        day: "numeric",
+                      })}
+                    </time>
+                    <h3>{post.data.title}</h3>
+                    <p>{post.data.description}</p>
+                  </a>
+                </article>
+              ))}
             </div>
-            <div class="head-rule"></div>
-            <a href="/blog" class="devlog-all">All Posts →</a>
-          </div>
-          <div class="devlog-grid">
-            {posts.map((post, i) => (
-              <article class="devlog-card">
-                <a href={`/blog/${post.id}/`} class="devlog-link">
-                  <div class="card-top-stripe" style={`background: ${i % 2 === 0 ? '#e8157a' : '#00e5c3'}`}></div>
-                  <time>
-                    {post.data.pubDate.toLocaleDateString("en-US", {
-                      year: "numeric",
-                      month: "short",
-                      day: "numeric",
-                    })}
-                  </time>
-                  <h3>{post.data.title}</h3>
-                  <p>{post.data.description}</p>
-                </a>
-              </article>
-            ))}
-          </div>
-        </section>
-      )}
+          </section>
+        )
+      }
     </main>
     <Footer />
   </body>
@@ -319,8 +341,13 @@ const posts = (await getCollection("blog"))
   }
 
   @keyframes pulse-anim {
-    0%, 100% { opacity: 1; }
-    50% { opacity: 0.2; }
+    0%,
+    100% {
+      opacity: 1;
+    }
+    50% {
+      opacity: 0.2;
+    }
   }
 
   .hero-center {
@@ -441,9 +468,18 @@ const posts = (await getCollection("blog"))
     gap: 4px;
   }
 
-  .stripe-pink { flex: 1; background: #e8157a; }
-  .stripe-gap { flex: 0.2; background: transparent; }
-  .stripe-cyan { flex: 1; background: #00e5c3; }
+  .stripe-pink {
+    flex: 1;
+    background: #e8157a;
+  }
+  .stripe-gap {
+    flex: 0.2;
+    background: transparent;
+  }
+  .stripe-cyan {
+    flex: 1;
+    background: #00e5c3;
+  }
 
   /* ═══ SECTIONS ═══ */
   .story,
@@ -455,7 +491,9 @@ const posts = (await getCollection("blog"))
     border-bottom: 1px solid #12121e;
   }
 
-  .devlog { border-bottom: none; }
+  .devlog {
+    border-bottom: none;
+  }
 
   .section-head {
     display: flex;
@@ -474,8 +512,12 @@ const posts = (await getCollection("blog"))
     flex-shrink: 0;
   }
 
-  .num-pink { border-color: #e8157a; }
-  .num-cyan { border-color: #00e5c3; }
+  .num-pink {
+    border-color: #e8157a;
+  }
+  .num-cyan {
+    border-color: #00e5c3;
+  }
 
   .num {
     font-family: "Bebas Neue", sans-serif;
@@ -536,8 +578,12 @@ const posts = (await getCollection("blog"))
     height: 2px;
   }
 
-  .edge-pink { background: #e8157a; }
-  .edge-cyan { background: #00e5c3; }
+  .edge-pink {
+    background: #e8157a;
+  }
+  .edge-cyan {
+    background: #00e5c3;
+  }
 
   .story-card p {
     font-family: "IBM Plex Mono", monospace;
@@ -686,22 +732,57 @@ const posts = (await getCollection("blog"))
 
   /* ═══ RESPONSIVE ═══ */
   @media (max-width: 1024px) {
-    .story-grid { grid-template-columns: 1fr; }
-    .feature-grid { grid-template-columns: 1fr; }
-    .devlog-grid { grid-template-columns: 1fr; }
-    .hero-top-bar { flex-wrap: wrap; justify-content: center; }
+    .story-grid {
+      grid-template-columns: 1fr;
+    }
+    .feature-grid {
+      grid-template-columns: 1fr;
+    }
+    .devlog-grid {
+      grid-template-columns: 1fr;
+    }
+    .hero-top-bar {
+      flex-wrap: wrap;
+      justify-content: center;
+    }
   }
 
   @media (max-width: 720px) {
-    .hero { padding: 2rem 1.25rem 0; }
-    .story, .features, .devlog { padding: 2.5rem 1.25rem; }
-    .head-title { font-size: 1.6rem; }
-    .section-head { flex-wrap: wrap; gap: 0.75rem; }
-    .cta-row { flex-direction: column; width: 100%; }
-    .btn { width: 100%; }
-    .num-block { width: 45px; height: 45px; }
-    .num { font-size: 1.4rem; }
-    .tagline { flex-direction: column; gap: 0.5rem; }
-    .tag-line { display: none; }
+    .hero {
+      padding: 2rem 1.25rem 0;
+    }
+    .story,
+    .features,
+    .devlog {
+      padding: 2.5rem 1.25rem;
+    }
+    .head-title {
+      font-size: 1.6rem;
+    }
+    .section-head {
+      flex-wrap: wrap;
+      gap: 0.75rem;
+    }
+    .cta-row {
+      flex-direction: column;
+      width: 100%;
+    }
+    .btn {
+      width: 100%;
+    }
+    .num-block {
+      width: 45px;
+      height: 45px;
+    }
+    .num {
+      font-size: 1.4rem;
+    }
+    .tagline {
+      flex-direction: column;
+      gap: 0.5rem;
+    }
+    .tag-line {
+      display: none;
+    }
   }
 </style>
