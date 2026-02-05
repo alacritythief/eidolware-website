@@ -7,6 +7,7 @@ import BlueskyFeed from "../components/BlueskyFeed.astro";
 import { SITE_DESCRIPTION, SITE_TITLE } from "../consts";
 import { getCollection } from "astro:content";
 import eidolwareLogo from "../assets/eidolware_logo.png";
+import annaSide from "../assets/anna-side.png";
 
 const posts = (await getCollection("blog"))
   .sort((a, b) => b.data.pubDate.valueOf() - a.data.pubDate.valueOf())
@@ -23,6 +24,7 @@ const posts = (await getCollection("blog"))
     <main class="home-main">
       <section class="hero">
         <div class="hero-bg">
+          <div class="hero-grid"></div>
           <div class="glow glow-pink"></div>
           <div class="glow glow-cyan"></div>
           <div class="scanlines"></div>
@@ -76,14 +78,23 @@ const posts = (await getCollection("blog"))
 
         <div class="hero-stripe">
           <div class="stripe-pink"></div>
-          <div class="stripe-gap"></div>
           <div class="stripe-cyan"></div>
         </div>
       </section>
 
       <!-- Story -->
-      <section class="story">
-        <div class="section-head">
+      <div class="story-banner">
+        <div class="banner-art">
+          <Image
+            src={annaSide}
+            alt="Anna Lam"
+            width={800}
+            height={500}
+            class="banner-art-img"
+            loading="lazy"
+          />
+        </div>
+        <div class="banner-head">
           <div class="num-block num-pink">
             <span class="num">01</span>
           </div>
@@ -91,8 +102,10 @@ const posts = (await getCollection("blog"))
             <span class="head-jp">物語</span>
             <h2 class="head-title">The Story</h2>
           </div>
-          <div class="head-rule"></div>
         </div>
+      </div>
+
+      <section class="story story-no-head">
 
         <div class="story-grid">
           <div class="story-card card-lead">
@@ -247,6 +260,16 @@ const posts = (await getCollection("blog"))
     inset: 0;
     pointer-events: none;
     overflow: hidden;
+  }
+
+  .hero-grid {
+    position: absolute;
+    inset: 0;
+    background-image:
+      linear-gradient(rgba(232, 21, 122, 0.06) 1px, transparent 1px),
+      linear-gradient(90deg, rgba(232, 21, 122, 0.06) 1px, transparent 1px);
+    background-size: 60px 60px;
+    mask-image: radial-gradient(ellipse 80% 70% at 50% 40%, black 20%, transparent 70%);
   }
 
   .glow {
@@ -465,20 +488,65 @@ const posts = (await getCollection("blog"))
   .hero-stripe {
     display: flex;
     height: 3px;
-    gap: 4px;
   }
 
   .stripe-pink {
     flex: 1;
     background: #e8157a;
   }
-  .stripe-gap {
-    flex: 0.2;
-    background: transparent;
-  }
   .stripe-cyan {
     flex: 1;
     background: #00e5c3;
+  }
+
+  /* ═══ STORY BANNER ═══ */
+  .story-banner {
+    position: relative;
+    max-width: 1400px;
+    margin: 0 auto;
+    overflow: hidden;
+  }
+
+  .banner-head {
+    display: flex;
+    align-items: center;
+    gap: 1.25rem;
+    position: relative;
+    z-index: 2;
+    padding: 3.5rem 3rem;
+  }
+
+  .banner-art {
+    position: absolute;
+    right: 0;
+    top: 50%;
+    transform: translateY(-50%);
+    height: 180%;
+    z-index: 1;
+    pointer-events: none;
+    mask-image: linear-gradient(90deg, black 0%, black 60%, transparent 95%);
+  }
+
+  .banner-art-img {
+    height: 100%;
+    width: auto;
+    object-fit: contain;
+    filter: brightness(0.85) saturate(1.1);
+  }
+
+  .story-no-head {
+    padding-top: 0 !important;
+  }
+
+  @media (max-width: 720px) {
+    .banner-head {
+      padding: 2rem 1.25rem;
+    }
+
+    .banner-art {
+      height: 130%;
+      opacity: 0.4;
+    }
   }
 
   /* ═══ SECTIONS ═══ */
@@ -559,7 +627,7 @@ const posts = (await getCollection("blog"))
   /* Story grid */
   .story-grid {
     display: grid;
-    grid-template-columns: 1.3fr 1fr 1fr;
+    grid-template-columns: repeat(3, 1fr);
     gap: 1px;
     background: #1a1a28;
   }

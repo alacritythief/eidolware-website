@@ -12,10 +12,10 @@ const isActive = href === pathname || href === "/" + (subpath?.[0] || "");
 <a
   href={href}
   class:list={[
-    "text-cyber-cyan hover:border-cyber-cyan inline-block border-b-2 border-transparent px-2 py-4 no-underline transition-all duration-300 md:py-2 md:text-sm",
+    "nav-link",
     className,
     {
-      "active-link !border-b-cyber-cyan font-bold": isActive,
+      "nav-link--active": isActive,
     },
   ]}
   {...props}
@@ -24,28 +24,44 @@ const isActive = href === pathname || href === "/" + (subpath?.[0] || "");
 </a>
 
 <style>
-  .active-link {
+  .nav-link {
+    display: inline-block;
+    padding: 0.875rem 1rem;
+    font-family: "Bebas Neue", sans-serif;
+    font-size: 1.15rem;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    text-decoration: none;
+    color: #8585a0;
+    border-bottom: 2px solid transparent;
+    transition: all 0.2s ease;
     position: relative;
   }
 
-  .active-link::after {
+  .nav-link:hover {
+    color: #00e5c3;
+  }
+
+  .nav-link--active {
+    color: #fff;
+    border-bottom-color: #e8157a;
+  }
+
+  .nav-link--active::after {
     content: "";
     position: absolute;
     bottom: 0;
     left: 0;
     right: 0;
     height: 2px;
-    background-color: var(--cyber-cyan);
-    box-shadow:
-      0 0 8px rgba(0, 229, 195, 0.8),
-      0 0 12px rgba(0, 229, 195, 0.6),
-      0 0 16px rgba(0, 229, 195, 0.4);
+    background: #e8157a;
+    box-shadow: 0 0 10px rgba(232, 21, 122, 0.6), 0 0 20px rgba(232, 21, 122, 0.3);
   }
 
   @media (max-width: 720px) {
-    a {
-      padding: 0.5em 0.5em !important;
-      font-size: 0.85em !important;
+    .nav-link {
+      padding: 0.5rem 0.6rem;
+      font-size: 1rem;
     }
   }
 </style>

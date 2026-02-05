@@ -5,14 +5,11 @@ import HeaderLink from "./HeaderLink.astro";
 import eidolwareLogoSmall from "../assets/eidolware_logo_small.png";
 ---
 
-<header
-  class="border-cyber-pink m-0 box-border w-full border-b bg-[#0a0a14]/95 shadow-[0_4px_20px_rgba(232,21,122,0.2)] backdrop-blur-md"
->
-  <nav
-    class="max-w-site relative mx-auto grid w-full grid-cols-[1fr_auto_1fr] items-center px-8"
-  >
-    <h2 class="font-display m-0 justify-self-start text-2xl font-extrabold">
-      <a href="/" class="header-logo no-underline" aria-label={SITE_TITLE}>
+<header class="site-header">
+  <div class="header-accent"></div>
+  <nav class="header-nav">
+    <h2 class="header-brand">
+      <a href="/" class="header-logo" aria-label={SITE_TITLE}>
         <Image
           src={eidolwareLogoSmall}
           alt={SITE_TITLE}
@@ -24,22 +21,22 @@ import eidolwareLogoSmall from "../assets/eidolware_logo_small.png";
         />
       </a>
     </h2>
-    <div class="flex justify-center gap-2">
+    <div class="nav-links">
       <HeaderLink href="/">Home</HeaderLink>
       <HeaderLink href="/blog">Devlog</HeaderLink>
       <HeaderLink href="/characters">Characters</HeaderLink>
       <HeaderLink href="/gallery">Gallery</HeaderLink>
       <HeaderLink href="/about">About</HeaderLink>
     </div>
-    <div class="flex gap-4 justify-self-end">
+    <div class="nav-social">
       <a
         href="https://bsky.app/profile/fatbat.studio"
         target="_blank"
         rel="noopener noreferrer"
-        class="text-cyber-cyan hover:border-cyber-cyan border-b-2 border-transparent px-2 py-2 no-underline transition-all duration-300 hover:[filter:drop-shadow(0_0_8px_#00e5c3)]"
+        class="social-icon"
       >
         <span class="sr-only">Follow on Bluesky</span>
-        <svg viewBox="0 0 24 24" aria-hidden="true" width="28" height="28">
+        <svg viewBox="0 0 24 24" aria-hidden="true" width="24" height="24">
           <path
             fill="currentColor"
             d="M12 10.8c-1.087-2.114-4.046-6.053-6.798-7.995C2.566.944 1.561 1.266.902 1.565.139 1.908 0 3.08 0 3.768c0 .69.378 5.65.624 6.479.815 2.736 3.713 3.66 6.383 3.364.136-.02.275-.039.415-.056-.138.022-.276.04-.415.056-3.912.58-7.387 2.005-2.83 7.078 5.013 5.19 6.87-1.113 7.823-4.308.953 3.195 2.05 9.271 7.733 4.308 4.267-4.308 1.172-6.498-2.74-7.078a8.741 8.741 0 0 1-.415-.056c.14.017.279.036.415.056 2.67.297 5.568-.628 6.383-3.364.246-.828.624-5.79.624-6.478 0-.69-.139-1.861-.902-2.206-.659-.298-1.664-.62-4.3 1.24C16.046 4.748 13.087 8.687 12 10.8Z"
@@ -50,14 +47,14 @@ import eidolwareLogoSmall from "../assets/eidolware_logo_small.png";
         href="https://fatbatstudio.itch.io/eidolware"
         target="_blank"
         rel="noopener noreferrer"
-        class="text-cyber-cyan hover:border-cyber-cyan border-b-2 border-transparent px-2 py-2 no-underline transition-all duration-300 hover:[filter:drop-shadow(0_0_8px_#00e5c3)]"
+        class="social-icon"
       >
         <span class="sr-only">Play on itch.io</span>
         <svg
           viewBox="0 0 245.371 220.736"
           aria-hidden="true"
-          width="28"
-          height="28"
+          width="24"
+          height="24"
         >
           <path
             fill="currentColor"
@@ -70,42 +67,107 @@ import eidolwareLogoSmall from "../assets/eidolware_logo_small.png";
 </header>
 
 <style>
+  .site-header {
+    position: relative;
+    width: 100%;
+    background: #0a0a14;
+    border-bottom: 1px solid #1a1a28;
+    backdrop-blur: 12px;
+  }
+
+  .header-accent {
+    height: 2px;
+    background: linear-gradient(90deg, #e8157a 50%, #00e5c3 50%);
+  }
+
+  .header-nav {
+    max-width: 1400px;
+    margin: 0 auto;
+    display: grid;
+    grid-template-columns: 1fr auto 1fr;
+    align-items: center;
+    padding: 0 2rem;
+  }
+
+  .header-brand {
+    margin: 0;
+    justify-self: start;
+  }
+
   .header-logo {
     display: inline-flex;
     align-items: center;
-    padding: 0.35rem 0;
+    padding: 0.5rem 0;
+    text-decoration: none;
   }
 
   .header-logo-img {
     width: 180px;
     height: auto;
+    filter: brightness(1.1);
+    transition: filter 0.2s ease;
+  }
+
+  .header-logo:hover .header-logo-img {
+    filter: brightness(1.4) drop-shadow(0 0 8px rgba(232, 21, 122, 0.4));
+  }
+
+  .nav-links {
+    display: flex;
+    align-items: center;
+    gap: 0;
+  }
+
+  .nav-social {
+    display: flex;
+    gap: 0.25rem;
+    justify-self: end;
+    align-items: center;
+  }
+
+  .social-icon {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 36px;
+    height: 36px;
+    color: #8585a0;
+    text-decoration: none;
+    border: 1px solid transparent;
+    transition: all 0.2s ease;
+  }
+
+  .social-icon:hover {
+    color: #00e5c3;
+    border-color: #1a1a28;
+    background: rgba(0, 229, 195, 0.05);
+    box-shadow: 0 0 12px rgba(0, 229, 195, 0.15);
   }
 
   @media (max-width: 720px) {
-    nav {
-      grid-template-columns: 1fr !important;
-      gap: 0.5rem !important;
-      padding: 0.5em 0 !important;
+    .header-nav {
+      grid-template-columns: 1fr;
+      gap: 0.25rem;
+      padding: 0 1rem;
     }
 
-    h2 {
-      font-size: 1.1em !important;
-      justify-self: center !important;
-      text-align: center !important;
+    .header-brand {
+      justify-self: center;
     }
 
     .header-logo-img {
       width: 160px;
     }
 
-    .flex.gap-2 {
-      justify-self: center !important;
-      gap: 0.25rem !important;
-      flex-wrap: wrap !important;
+    .nav-links {
+      justify-self: center;
+      flex-wrap: wrap;
+      justify-content: center;
+      gap: 0;
     }
 
-    .flex.gap-4 {
-      display: none !important;
+    .nav-social {
+      display: none;
     }
   }
 </style>
