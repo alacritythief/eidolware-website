@@ -8,6 +8,7 @@ import { SITE_DESCRIPTION, SITE_TITLE } from "../consts";
 import { getCollection } from "astro:content";
 import eidolwareLogo from "../assets/eidolware_logo.png";
 import annaSide from "../assets/anna-side.png";
+import susieSide from "../assets/susie-side.png";
 
 const posts = (await getCollection("blog"))
   .sort((a, b) => b.data.pubDate.valueOf() - a.data.pubDate.valueOf())
@@ -137,11 +138,25 @@ const posts = (await getCollection("blog"))
             </p>
           </div>
         </div>
+        <div class="story-stripe">
+          <div class="stripe-pink"></div>
+          <div class="stripe-cyan"></div>
+        </div>
       </section>
 
       <!-- Features -->
-      <section class="features">
-        <div class="section-head">
+      <div class="features-banner">
+        <div class="banner-art">
+          <Image
+            src={susieSide}
+            alt="Susie"
+            width={800}
+            height={500}
+            class="banner-art-img"
+            loading="lazy"
+          />
+        </div>
+        <div class="banner-head">
           <div class="num-block num-cyan">
             <span class="num">02</span>
           </div>
@@ -149,11 +164,13 @@ const posts = (await getCollection("blog"))
             <span class="head-jp">特徴</span>
             <h2 class="head-title">FedoraCon Awaits</h2>
           </div>
-          <div class="head-rule"></div>
         </div>
+      </div>
 
+      <section class="features features-no-head">
         <div class="feature-grid">
           <div class="feature">
+            <div class="card-edge edge-pink"></div>
             <div class="feature-idx">
               <span class="idx-num">A</span>
               <div class="idx-line"></div>
@@ -166,6 +183,7 @@ const posts = (await getCollection("blog"))
             </p>
           </div>
           <div class="feature">
+            <div class="card-edge edge-cyan"></div>
             <div class="feature-idx">
               <span class="idx-num">B</span>
               <div class="idx-line"></div>
@@ -178,6 +196,7 @@ const posts = (await getCollection("blog"))
             </p>
           </div>
           <div class="feature">
+            <div class="card-edge edge-pink"></div>
             <div class="feature-idx">
               <span class="idx-num">C</span>
               <div class="idx-line"></div>
@@ -536,6 +555,26 @@ const posts = (await getCollection("blog"))
 
   .story-no-head {
     padding-top: 0 !important;
+    padding-bottom: 0 !important;
+    border-bottom: none !important;
+  }
+
+  .story-stripe {
+    display: flex;
+    height: 3px;
+    margin-top: 4rem;
+  }
+
+  /* ═══ FEATURES BANNER ═══ */
+  .features-banner {
+    position: relative;
+    max-width: 1400px;
+    margin: 0 auto;
+    overflow: hidden;
+  }
+
+  .features-no-head {
+    padding-top: 0 !important;
   }
 
   @media (max-width: 720px) {
@@ -671,11 +710,14 @@ const posts = (await getCollection("blog"))
   .feature-grid {
     display: grid;
     grid-template-columns: repeat(3, 1fr);
-    gap: 2.5rem;
+    gap: 1px;
+    background: #1a1a28;
   }
 
   .feature {
-    padding: 0;
+    background: #0a0a14;
+    padding: 2rem;
+    position: relative;
   }
 
   .feature-idx {
