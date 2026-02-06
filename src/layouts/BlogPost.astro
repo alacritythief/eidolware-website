@@ -52,6 +52,86 @@ const { title, description, pubDate, updatedDate, heroImage } = Astro.props;
         </div>
       </article>
     </main>
+    <!-- Blog Lightbox -->
+    <div class="blog-lightbox" id="blog-lightbox" aria-hidden="true">
+      <div class="blog-lightbox-backdrop"></div>
+      <button class="blog-lightbox-close" aria-label="Close lightbox">&times;</button>
+      <div class="blog-lightbox-content">
+        <img id="blog-lightbox-img" class="blog-lightbox-img" src="" alt="" />
+        <div class="blog-lightbox-caption" id="blog-lightbox-caption"></div>
+      </div>
+      <button class="blog-lightbox-prev" aria-label="Previous image">&#8249;</button>
+      <button class="blog-lightbox-next" aria-label="Next image">&#8250;</button>
+    </div>
+
     <Footer />
+
+    <script>
+      document.addEventListener('DOMContentLoaded', () => {
+        const triggers = Array.from(document.querySelectorAll('[data-blog-lightbox]'));
+        if (triggers.length === 0) return;
+
+        const lightbox = document.getElementById('blog-lightbox');
+        const lightboxImg = document.getElementById('blog-lightbox-img');
+        const lightboxCaption = document.getElementById('blog-lightbox-caption');
+        const closeBtn = document.querySelector('.blog-lightbox-close');
+        const backdrop = document.querySelector('.blog-lightbox-backdrop');
+        const prevBtn = document.querySelector('.blog-lightbox-prev');
+        const nextBtn = document.querySelector('.blog-lightbox-next');
+
+        const images = triggers.map(t => ({
+          src: t.dataset.fullSrc,
+          alt: t.dataset.alt || '',
+        }));
+
+        let currentIndex = 0;
+
+        function updateNav() {
+          if (images.length <= 1) {
+            prevBtn.style.display = 'none';
+            nextBtn.style.display = 'none';
+          }
+        }
+
+        function showImage(index) {
+          if (index < 0) index = images.length - 1;
+          if (index >= images.length) index = 0;
+          currentIndex = index;
+          lightboxImg.src = images[index].src;
+          lightboxImg.alt = images[index].alt;
+          lightboxCaption.textContent = images[index].alt;
+        }
+
+        function openLightbox(index) {
+          showImage(index);
+          updateNav();
+          lightbox.classList.add('active');
+          lightbox.setAttribute('aria-hidden', 'false');
+          document.body.style.overflow = 'hidden';
+        }
+
+        function closeLightbox() {
+          lightbox.classList.remove('active');
+          lightbox.setAttribute('aria-hidden', 'true');
+          document.body.style.overflow = '';
+        }
+
+        triggers.forEach((trigger, i) => {
+          trigger.addEventListener('click', () => openLightbox(i));
+        });
+
+        closeBtn?.addEventListener('click', closeLightbox);
+        backdrop?.addEventListener('click', closeLightbox);
+        prevBtn?.addEventListener('click', () => showImage(currentIndex - 1));
+        nextBtn?.addEventListener('click', () => showImage(currentIndex + 1));
+
+        document.addEventListener('keydown', (e) => {
+          if (!lightbox.classList.contains('active')) return;
+          if (e.key === 'Escape') closeLightbox();
+          if (e.key === 'ArrowLeft') showImage(currentIndex - 1);
+          if (e.key === 'ArrowRight') showImage(currentIndex + 1);
+        });
+      });
+    </script>
   </body>
 </html>

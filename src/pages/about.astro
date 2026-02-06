@@ -123,7 +123,15 @@ import fatbatLogo from "../assets/logos/fatbat_logo.png";
                   target="_blank"
                   rel="noopener noreferrer">Ryv</a
                 >
-                <span class="credit-desc">— Art & Programming, Creator of EIDOLWARE</span>
+                <span class="credit-desc"
+                  >— Art, Programming & Writing, Creator of EIDOLWARE</span
+                >
+              </li>
+              <li class="redacted-line">
+                <span class="redacted" aria-label="Redacted name"
+                  >████████████</span
+                >
+                <span class="credit-desc">— Co-Writer</span>
               </li>
             </ul>
           </div>
@@ -158,7 +166,13 @@ import fatbatLogo from "../assets/logos/fatbat_logo.png";
                   target="_blank"
                   rel="noopener noreferrer">Darby Machin</a
                 >
-                <span class="credit-desc">— Character sprite templates and tile packs (<a href="https://malibudarby.itch.io/" target="_blank" rel="noopener noreferrer">itch.io</a>)</span>
+                <span class="credit-desc"
+                  >— Character sprite templates and tile packs (<a
+                    href="https://malibudarby.itch.io/"
+                    target="_blank"
+                    rel="noopener noreferrer">itch.io</a
+                  >)</span
+                >
               </li>
               <li>
                 <a
@@ -182,10 +196,28 @@ import fatbatLogo from "../assets/logos/fatbat_logo.png";
                   target="_blank"
                   rel="noopener noreferrer">Richard Lems</a
                 >
-                <span class="credit-desc">— Blastmode Games, creator of Mighty Goose & Sea Sniffers</span>
+                <span class="credit-desc"
+                  >— Blastmode Games, creator of Mighty Goose & Sea Sniffers</span
+                >
                 <ul class="credits-sublist">
-                  <li><a href="https://blastmode.itch.io/pixelbasher" target="_blank" rel="noopener noreferrer">PixelBasher</a> software</li>
-                  <li><a href="https://www.construct.net/en/make-games/addons/208/doodle-sprite" target="_blank" rel="noopener noreferrer">Doodle Sprite</a> & <a href="https://www.construct.net/en/make-games/addons/769/rim-light" target="_blank" rel="noopener noreferrer">Rim Light</a> shaders</li>
+                  <li>
+                    <a
+                      href="https://blastmode.itch.io/pixelbasher"
+                      target="_blank"
+                      rel="noopener noreferrer">PixelBasher</a
+                    > software
+                  </li>
+                  <li>
+                    <a
+                      href="https://www.construct.net/en/make-games/addons/208/doodle-sprite"
+                      target="_blank"
+                      rel="noopener noreferrer">Doodle Sprite</a
+                    > & <a
+                      href="https://www.construct.net/en/make-games/addons/769/rim-light"
+                      target="_blank"
+                      rel="noopener noreferrer">Rim Light</a
+                    > shaders
+                  </li>
                 </ul>
               </li>
             </ul>
@@ -259,7 +291,9 @@ import fatbatLogo from "../assets/logos/fatbat_logo.png";
                   target="_blank"
                   rel="noopener noreferrer">True Grit Texture Supply</a
                 >
-                <span class="credit-desc">— Digital art brushes and effects</span>
+                <span class="credit-desc"
+                  >— Digital art brushes and effects</span
+                >
               </li>
               <li>
                 <a
@@ -275,7 +309,9 @@ import fatbatLogo from "../assets/logos/fatbat_logo.png";
                   target="_blank"
                   rel="noopener noreferrer">Audacity</a
                 >
-                <span class="credit-desc">— Open-source audio editing software</span>
+                <span class="credit-desc"
+                  >— Open-source audio editing software</span
+                >
               </li>
               <li>
                 <a
@@ -342,6 +378,27 @@ import fatbatLogo from "../assets/logos/fatbat_logo.png";
       </section>
     </main>
     <Footer />
+
+    <script>
+      document.addEventListener("DOMContentLoaded", () => {
+        const chars =
+          "█▓▒░╳╲╱◼◻■□▪▫▬▮▯╍╌┅┄⠿⣿⡿⢿абвгдежзиклмнопрстуфхцчшщ0123456789@#$%&?!";
+        const redacted = document.querySelectorAll(".redacted");
+
+        redacted.forEach((el) => {
+          const len = el.textContent.length;
+          function scramble() {
+            let text = "";
+            for (let i = 0; i < len; i++) {
+              text += chars[Math.floor(Math.random() * chars.length)];
+            }
+            el.textContent = text;
+          }
+          scramble();
+          setInterval(scramble, 80);
+        });
+      });
+    </script>
   </body>
 </html>
 
@@ -683,6 +740,23 @@ import fatbatLogo from "../assets/logos/fatbat_logo.png";
   .credit-desc {
     color: #9a9aa2;
     font-size: 0.95rem;
+  }
+
+  .redacted-line {
+    display: flex;
+    align-items: baseline;
+  }
+
+  .redacted {
+    font-family: "IBM Plex Mono", monospace;
+    color: #e8157a;
+    letter-spacing: 0.05em;
+    opacity: 0.6;
+    width: 12ch;
+    flex-shrink: 0;
+    overflow: hidden;
+    white-space: nowrap;
+    margin-right: 0.4rem;
   }
 
   .credit-desc a {

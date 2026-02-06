@@ -1,0 +1,40 @@
+---
+import { Image } from "astro:assets";
+
+interface Props {
+  src: ImageMetadata;
+  alt: string;
+  width?: number;
+  lightbox?: boolean;
+  square?: boolean;
+}
+
+const { src, alt, width = 600, lightbox = false, square = false } = Astro.props;
+const figureClass = [
+  "blog-image",
+  lightbox && "blog-image--lightbox",
+  square && "blog-image--square",
+].filter(Boolean).join(" ");
+---
+
+{lightbox ? (
+  <figure class={figureClass}>
+    <button
+      type="button"
+      class="blog-lightbox-trigger"
+      data-blog-lightbox
+      data-full-src={src.src}
+      data-alt={alt}
+      aria-label={`View full size: ${alt}`}
+    >
+      <Image src={src} alt={alt} width={width} />
+      <span class="blog-zoom-hint">Click to enlarge</span>
+    </button>
+    {alt && <figcaption>{alt}</figcaption>}
+  </figure>
+) : (
+  <figure class={figureClass}>
+    <Image src={src} alt={alt} width={width} />
+    {alt && <figcaption>{alt}</figcaption>}
+  </figure>
+)}

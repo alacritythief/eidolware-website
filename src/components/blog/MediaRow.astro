@@ -1,0 +1,15 @@
+---
+interface Props {
+  small?: boolean;
+  columns?: number;
+}
+
+const { small = false, columns = 2 } = Astro.props;
+---
+
+<div
+  class:list={["blog-media-row", { "blog-media-row--small": small }]}
+  style={`grid-template-columns: repeat(${columns}, 1fr);`}
+>
+  <slot />
+</div>
