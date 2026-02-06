@@ -115,9 +115,17 @@ import fatbatLogo from "../assets/logos/fatbat_logo.png";
         </div>
 
         <div class="section-body">
-          <p>Staff credits for EIDOLWARE will be listed here.</p>
-          <div class="coming-soon">
-            <span>Coming soon…</span>
+          <div class="credits-group">
+            <ul class="credits-list">
+              <li>
+                <a
+                  href="https://bsky.app/profile/fatbat.studio"
+                  target="_blank"
+                  rel="noopener noreferrer">Ryv</a
+                >
+                <span class="credit-desc">— Art & Programming, Creator of EIDOLWARE</span>
+              </li>
+            </ul>
           </div>
         </div>
       </section>
@@ -142,6 +150,48 @@ import fatbatLogo from "../assets/logos/fatbat_logo.png";
           </p>
 
           <div class="credits-group">
+            <h3 class="credits-heading">Artists</h3>
+            <ul class="credits-list">
+              <li>
+                <a
+                  href="https://bsky.app/profile/malibudarby87.bsky.social"
+                  target="_blank"
+                  rel="noopener noreferrer">Darby Machin</a
+                >
+                <span class="credit-desc">— Character sprite templates and tile packs (<a href="https://malibudarby.itch.io/" target="_blank" rel="noopener noreferrer">itch.io</a>)</span>
+              </li>
+              <li>
+                <a
+                  href="https://narehop.itch.io/"
+                  target="_blank"
+                  rel="noopener noreferrer">Nokotapixel</a
+                >
+                <span class="credit-desc">— Cursor and pointer assets</span>
+              </li>
+              <li>
+                <a
+                  href="https://pixeline-k.itch.io/"
+                  target="_blank"
+                  rel="noopener noreferrer">Pixeline</a
+                >
+                <span class="credit-desc">— Forest tileset assets</span>
+              </li>
+              <li>
+                <a
+                  href="https://bsky.app/profile/rilem.nl"
+                  target="_blank"
+                  rel="noopener noreferrer">Richard Lems</a
+                >
+                <span class="credit-desc">— Blastmode Games, creator of Mighty Goose & Sea Sniffers</span>
+                <ul class="credits-sublist">
+                  <li><a href="https://blastmode.itch.io/pixelbasher" target="_blank" rel="noopener noreferrer">PixelBasher</a> software</li>
+                  <li><a href="https://www.construct.net/en/make-games/addons/208/doodle-sprite" target="_blank" rel="noopener noreferrer">Doodle Sprite</a> & <a href="https://www.construct.net/en/make-games/addons/769/rim-light" target="_blank" rel="noopener noreferrer">Rim Light</a> shaders</li>
+                </ul>
+              </li>
+            </ul>
+          </div>
+
+          <div class="credits-group">
             <h3 class="credits-heading">Music Artists</h3>
             <ul class="credits-list">
               <li>
@@ -164,6 +214,76 @@ import fatbatLogo from "../assets/logos/fatbat_logo.png";
                   target="_blank"
                   rel="noopener noreferrer">WOW Sound</a
                 >
+              </li>
+            </ul>
+          </div>
+
+          <div class="credits-group">
+            <h3 class="credits-heading">Software</h3>
+            <ul class="credits-list">
+              <li>
+                <a
+                  href="https://www.construct.net/en"
+                  target="_blank"
+                  rel="noopener noreferrer">Construct 3</a
+                >
+                <span class="credit-desc">— Game engine</span>
+              </li>
+              <li>
+                <a
+                  href="https://www.pixquare.art/"
+                  target="_blank"
+                  rel="noopener noreferrer">Pixquare</a
+                >
+                <span class="credit-desc">— iPad pixel art editor</span>
+              </li>
+              <li>
+                <a
+                  href="https://www.aseprite.org/"
+                  target="_blank"
+                  rel="noopener noreferrer">Aseprite</a
+                >
+                <span class="credit-desc">— Desktop pixel art editor</span>
+              </li>
+              <li>
+                <a
+                  href="https://procreate.com/"
+                  target="_blank"
+                  rel="noopener noreferrer">Procreate</a
+                >
+                <span class="credit-desc">— iPad art software</span>
+              </li>
+              <li>
+                <a
+                  href="https://www.truegrittexturesupply.com/"
+                  target="_blank"
+                  rel="noopener noreferrer">True Grit Texture Supply</a
+                >
+                <span class="credit-desc">— Digital art brushes and effects</span>
+              </li>
+              <li>
+                <a
+                  href="https://www.bfxr.net/"
+                  target="_blank"
+                  rel="noopener noreferrer">BFXR</a
+                >
+                <span class="credit-desc">— Sound effect generator</span>
+              </li>
+              <li>
+                <a
+                  href="https://www.audacityteam.org/"
+                  target="_blank"
+                  rel="noopener noreferrer">Audacity</a
+                >
+                <span class="credit-desc">— Open-source audio editing software</span>
+              </li>
+              <li>
+                <a
+                  href="https://www.image-line.com/"
+                  target="_blank"
+                  rel="noopener noreferrer">FL Studio</a
+                >
+                <span class="credit-desc">— Music DAW</span>
               </li>
             </ul>
           </div>
@@ -558,6 +678,46 @@ import fatbatLogo from "../assets/logos/fatbat_logo.png";
 
   .credits-list a:hover {
     text-shadow: 0 0 10px rgba(0, 229, 195, 0.6);
+  }
+
+  .credit-desc {
+    color: #9a9aa2;
+    font-size: 0.95rem;
+  }
+
+  .credit-desc a {
+    color: #e8157a;
+  }
+
+  .credit-desc a:hover {
+    text-shadow: 0 0 10px rgba(232, 21, 122, 0.6);
+  }
+
+  .credits-sublist {
+    list-style: none;
+    padding: 0;
+    margin: 0.5rem 0 0 1rem;
+    display: flex;
+    flex-direction: column;
+    gap: 0.25rem;
+  }
+
+  .credits-sublist li {
+    position: relative;
+    padding-left: 1rem;
+    color: #9a9aa2;
+    font-size: 0.9rem;
+  }
+
+  .credits-sublist li::before {
+    content: "·";
+    position: absolute;
+    left: 0;
+    color: #e8157a;
+  }
+
+  .credits-sublist a {
+    color: #00e5c3;
   }
 
   /* Social Links */
